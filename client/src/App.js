@@ -1,41 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Axios from "axios";
+import Header from "./components/layout/Header";
+import Home from "./components/pages/Home";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import UserContext from "./context/UserContext";
 import "./App.css";
-import Post from "./components/Post";
 
 function App() {
-  const [posts, setPosts] = useState([
-    {
-      athletename: "Stephen Curry",
-      imageUrl:
-        "https://image-cdn.essentiallysports.com/wp-content/uploads/20200725130552/stephen-curry-gsw-2-scaled.jpg",
-    },
-    {
-      athletename: "Lebron James",
-      imageUrl:
-        "https://image-cdn.essentiallysports.com/wp-content/uploads/20200702112824/lebron-james-flexing-1600x901.jpg",
-    },
-  ]);
+  const [userData, setUserData] = useState({
+    token: undefined,
+    user: undefined,
+  });
+
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      let token = localStorage.getItem("auth-token");
+      if (token == null) {
+        localStorage.setItem("auth-token", "");
+        token = "";
+      }
+      const tokenRes = await Axios.post(
+        "http://localhost:5000/users/tokenIsValid",
+        null,
+        {
+          headers: { "x-auth-token": token },
+        }
+      );
+      if (tokenRes.data) {
+        const userRes = await Axios.get("http://localhost:5000/users/", {
+          headers: { "x-auth-token": token },
+        });
+        setUserData({
+          token,
+          user: userRes.data,
+        });
+      }
+    };
+
+    checkLoggedIn();
+  }, []);
 
   return (
-    <div className="App">
-      <div className="app__header">
-        <img
-          className="app__headerImage"
-          src="https://instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
-          alt=""
-        />
-      </div>
-
-      <h1>Hello World</h1>
-      {/* Header */}
-
-      {posts.map((post) => (
-        <Post athletename={post.athletename} imageUrl={post.imageUrl} />
-      ))}
-
-      {/* Posts */}
-      {/* Posts */}
-    </div>
+    <>
+      <BrowserRouter>
+        <UserContext.Provider value={{ userData, setUserData }}>
+          <Header />
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+            </Switch>
+          </div>
+        </UserContext.Provider>
+      </BrowserRouter>
+    </>
   );
 }
 

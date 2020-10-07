@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const jwtSecret = config.get("jwtSecret");
 
 const auth = (req, res, next) => {
   try {
@@ -9,7 +10,6 @@ const auth = (req, res, next) => {
         .status(401)
         .json({ msg: "No authentication token, authorization denied." });
     }
-    const jwtSecret = config.get("jwtSecret");
     const verified = jwt.verify(token, jwtSecret);
     if (!verified) {
       return res

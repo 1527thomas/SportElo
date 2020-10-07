@@ -1,0 +1,23 @@
+.header {
+  background-color: white;
+  padding: 20px;
+  border-bottom: 1px solid lightgray;
+  object-fit: contain;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header .auth_options {
+  height: 100%;
+  display: flex;
+}
+
+.header .auth_options button {
+  padding: 0 1rem;
+  background-color: #fafafa;
+}
+
+.header .auth_options button:hover {
+  background-color: lightgray;
+}

@@ -15,7 +15,7 @@ function Posts({ athletename, imageUrl }) {
       </div>
       {/* header -> avatar + athletename */}
 
-      <img className="post__image" src={imageUrl} />
+      <img className="post__image" src={imageUrl} alt="" />
       {/* image(s) */}
     </div>
   );
