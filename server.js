@@ -11,24 +11,25 @@ app.use(cors());
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
-  console.log(`Server has started on port: ${port}`);
+    console.log(`Server has started on port: ${port}`);
 });
 
 // set up mongoose
 const db = config.get("mongodbURI");
 
 mongoose.connect(
-  db,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  },
-  (err) => {
-    if (err) throw err;
-    console.log("MongoDB connection established");
-  }
+    db,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+    },
+    (err) => {
+        if (err) throw err;
+        console.log("MongoDB connection established");
+    }
 );
 
 // set up routes
 app.use("/users", require("./routes/userRouter"));
+app.use("/twitter", require("./routes/twitterRouter"));
