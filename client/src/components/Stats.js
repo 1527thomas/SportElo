@@ -25,6 +25,59 @@ function Stats({ name }) {
             //gets last page of player game stat info to get latest game stats
             getStats(player_stat_id, page).then(res => {
                 var game = res.data.length - 1;
+                console.log(game);
+
+                var date = res.data[game].game.date;
+
+                var year = parseInt(date.substring(0, 4));
+                var month = parseInt(date.substring(5, 7));
+                var day = parseInt(date.substring(8, 10));
+
+                console.log(month + "-" + day + "-" + year);
+
+                var newGame = 0;
+                var i;
+                for ( i = 0; i < game; i++){
+                    
+                    var date1 = res.data[i].game.date;
+
+                    console.log("compare: ");
+                    console.log(month1 + "-" + day1 + "-" + year1);
+                    console.log(month + "-" + day + "-" + year);
+                    var year1 = parseInt(date1.substring(0, 4));
+                    var month1 = parseInt(date1.substring(5, 7));
+                    var day1 = parseInt(date1.substring(8, 10));
+
+                    if ((year1 > year)) {
+
+
+                        year = year1;
+                        month = month1;
+                        day = day1;
+                        newGame = i;
+                    }
+                    else if (year == year1 && (month1 > month)) {
+                        year = year1;
+                        month = month1;
+                        day = day1;
+                        newGame = i;
+                    }
+                    else if (year == year1 && (month1 == month) && (day1 >= day)) {
+                        year = year1;
+                        month = month1;
+                        day = day1;
+                        newGame = i;
+                    }
+                    
+                }
+                game = newGame;
+                /*
+                while (res.data[game].min == "0" || res.data[game].min == "") {
+                    //console.log(res.data[game].min);
+                    game -= 1;
+                }
+                */
+
                 //various stats from latest game
                 var pts = res.data[game].pts;
                 var reb = res.data[game].reb;
