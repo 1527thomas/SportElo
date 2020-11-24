@@ -8,6 +8,8 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 
 import Axios from "axios";
 
+import Stats from "./Stats";
+
 
 function Posts({ athletename, imageUrl }) {
     var Scroll = require('react-scroll');
@@ -24,9 +26,9 @@ function Posts({ athletename, imageUrl }) {
     var profilePic =
         "https://image-cdn.essentiallysports.com/wp-content/uploads/20200702112824/lebron-james-flexing-1600x901.jpg";
     if (athletename === "Stephen Curry") {
-        //twitterHandle = "StephenCurry30";
+        twitterHandle = "StephenCurry30";
         //used james harden cuz steph curry hasnt tweeted recently
-        twitterHandle = "JHarden13";
+        //twitterHandle = "JHarden13";
         profilePic =
             "https://image-cdn.essentiallysports.com/wp-content/uploads/20200725130552/stephen-curry-gsw-2-scaled.jpg";
 
@@ -51,7 +53,7 @@ function Posts({ athletename, imageUrl }) {
           >
               <Slider>
                   <Slide index={0}>
-                      <img className="post__image" src={imageUrl} alt="" />
+                      <Stats name={athletename} />
                   </Slide>
                   <Slide index={1}>
                       <div className="post__tweet">
