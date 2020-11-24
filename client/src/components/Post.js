@@ -59,6 +59,7 @@ function Posts({ athletename, imageUrl }) {
                       <div className="post__tweet">
                           <Element name="test7" className="element" id="containerElement" style={{
                               position: 'relative',
+
                               height: '450px',
                               overflow: 'scroll'
                           }}>

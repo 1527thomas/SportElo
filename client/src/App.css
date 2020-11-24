@@ -5,8 +5,9 @@
 }
 
 .app__home {
-  background-color: #fafafa;
-  height: 100vh;
+    background-color: #fafafa;
+    height: 100vh;
+    border-radius: 25px;
 }
 
 .container {
