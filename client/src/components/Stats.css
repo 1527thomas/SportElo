@@ -1,0 +1,39 @@
+.stats_post {
+    background-color: white;
+    max-width: 500px;
+    max-height: 500px;
+    border: 1px solid lightgray;
+    border-radius: 25px;
+    margin-bottom: 45px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 50px;
+    text-align:center;
+}
+
+.stats_header {
+    padding: 10px;
+    background-color: darkblue;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    font-weight: bold;
+    color: white;
+}
+
+.stats_list {
+    display: flex;
+    padding: 10px 40px;
+    list-style-type: none;
+    justify-content: space-between;
+}
+
+.stats_label {
+    color: grey;
+    font-size: 15px;
+}
+
+.stats_line {
+    color: black;
+    font-size: 25px;
+    text-align:center;
+}

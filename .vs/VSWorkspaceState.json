@@ -1,14 +1,14 @@
 {
   "ExpandedNodes": [
     "",
+    "\\client",
     "\\client\\src",
     "\\client\\src\\components",
     "\\client\\src\\components\\auth",
-    "\\client\\src\\components\\pages",
     "\\config",
     "\\images",
     "\\routes"
   ],
-  "SelectedNode": "\\config\\default.json",
+  "SelectedNode": "\\client\\src\\components\\Stats.js",
   "PreviewInSolutionExplorer": false
 }
