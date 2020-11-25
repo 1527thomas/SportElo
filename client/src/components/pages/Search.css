@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+  }
+  
+  .app__home {
+      background-color: #fafafa;
+      height: 100vh;
+      border-radius: 25px;
+  }
+
+.search__container {
+    margin: 36px auto;
+	width: 100%;
+	max-width: 800px;
+}
+
+.search-label {
+	position: relative;
+}
+
+.search__container input {
+    width: 100%;
+    padding: 10px;
+    font-style: italic;
+    color: #444;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.search-icon {
+	position: absolute;
+	top: -10px;
+	font-size: 24px;
+	color: #555;
+	right: 18px;
+}

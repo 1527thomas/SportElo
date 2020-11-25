@@ -6,6 +6,7 @@ import Home from "./components/pages/Home";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import UserContext from "./context/UserContext";
+import Search from "./components/pages/Search";
 import "./App.css";
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
           <div className="container">
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route path="/search" component={Search} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
             </Switch>

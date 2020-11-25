@@ -1,15 +1,18 @@
 .post {
-  background-color: white;
-  max-width: 500px;
-  border: 1px solid lightgray;
-  margin-bottom: 45px;
+    background-color: white;
+    max-width: 500px;
+    max-height: 550px;
+    border: 1px solid lightgray;
+    margin-bottom: 45px;
+    border-radius: 25px;
+    margin-top: 10px;
 }
 
 .post__image {
-  width: 100%;
-  object-fit: contain;
-  border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
+    width: 100%;
+    object-fit: contain;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
 }
 
 .post__header {
@@ -21,3 +24,49 @@
 .post__avatar {
   margin-right: 10px;
 }
+
+.post__tweet {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+.post__back-button {
+    outline: none;
+    position: relative;
+    bottom: 250px;
+    background: rgba(0, 0, 0, 0);
+    border-right: 10px solid transparent;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid transparent;
+}
+
+.post__back-button:active {
+    transform: translateY(4px);
+}
+
+.post__next-button {
+    outline:none;
+    position: relative;
+    bottom: 250px;
+    left: 300px;
+    background: rgba(0, 0, 0, 0);
+    border-right: 10px solid transparent;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid transparent;
+}
+
+.post__next-button:active {
+        transform: translateY(4px);
+
+}
+
+.post__arrow {
+    width: 100%;
+    object-fit: contain;
+}
+
