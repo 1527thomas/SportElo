@@ -6,7 +6,6 @@ import Tweet from "./Tweet";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
-import Axios from "axios";
 
 import Stats from "./Stats";
 import NewsApi from "./NewsApi";

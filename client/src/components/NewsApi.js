@@ -29,7 +29,7 @@ function NewsApi({ athletename }) {
         <div className="newsapi__post">
             <div className="newsapi__post__title">{athleteNewsTitle}</div>
             <div className="newsapi__post__image">
-                <img src={athleteNewsImage}></img>
+                <img src={athleteNewsImage} alt="Athlete News Pic"></img>
             </div>
             <div className="newsapi__post__url">
                 <a href={athleteNewsUrl}>Check Out the Article Here</a>

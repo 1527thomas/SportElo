@@ -51,13 +51,13 @@ function Stats({ name }) {
                         day = day1;
                         newGame = i;
                     }
-                    else if (year == year1 && (month1 > month)) {
+                    else if (year === year1 && (month1 > month)) {
                         year = year1;
                         month = month1;
                         day = day1;
                         newGame = i;
                     }
-                    else if (year == year1 && (month1 == month) && (day1 >= day)) {
+                    else if (year === year1 && (month1 === month) && (day1 >= day)) {
                         year = year1;
                         month = month1;
                         day = day1;

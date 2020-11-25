@@ -21,7 +21,7 @@ function Home() {
     return (
         <div className="app__home">
             {posts.map((post) => (
-                <Post athletename={post.athletename} imageUrl={post.imageUrl} />
+                <Post key={post.athletename} athletename={post.athletename} imageUrl={post.imageUrl} />
             ))}
             
         </div>
