@@ -33,3 +33,5 @@ mongoose.connect(
 // set up routes
 app.use("/users", require("./routes/userRouter"));
 app.use("/twitter", require("./routes/twitterRouter"));
+app.use("/newsapi", require("./routes/newsapiRouter"));
+// app.use("/players", require("./routes/playersRouter"));

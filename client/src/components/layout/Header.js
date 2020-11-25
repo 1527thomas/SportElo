@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AuthOptions from "../auth/AuthOptions";
+import Search from "../pages/Search";
 import "./Header.css";
 
 function Header() {
@@ -12,6 +13,9 @@ function Header() {
           src="https://instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
           alt=""
         />
+      </Link>
+      <Link to="/Search">
+        Search
       </Link>
       <AuthOptions />
     </div>
