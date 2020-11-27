@@ -5,13 +5,14 @@ import Header from "./components/layout/Header";
 import Home from "./components/pages/Home";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UserContext from "./context/UserContext";
 import "./App.css";
 
 function App() {
   const [userData, setUserData] = useState({
     token: undefined,
-    user: undefined,
+    user: undefined
   });
 
   useEffect(() => {
@@ -25,16 +26,16 @@ function App() {
         "http://localhost:5000/users/tokenIsValid",
         null,
         {
-          headers: { "x-auth-token": token },
+          headers: { "x-auth-token": token }
         }
       );
       if (tokenRes.data) {
         const userRes = await Axios.get("http://localhost:5000/users/", {
-          headers: { "x-auth-token": token },
+          headers: { "x-auth-token": token }
         });
         setUserData({
           token,
-          user: userRes.data,
+          user: userRes.data
         });
       }
     };
@@ -49,9 +50,16 @@ function App() {
           <Header />
           <div className="container">
             <Switch>
+              {/* Public Pages */}
+              {/* LandingPage exact path="/" */}
+              {/* Login */}
+              {/* Register */}
               <Route exact path="/" component={Home} />
+              {/* Private Pages */}
+              {/* Home */}
+              {/* Search */}
               <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
+              <ProtectedRoute path="/register" component={<Register />} />
             </Switch>
           </div>
         </UserContext.Provider>
