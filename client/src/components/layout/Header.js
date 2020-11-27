@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AuthOptions from "../auth/AuthOptions";
-import Search from "../pages/Search";
 import "./Header.css";
 
 function Header() {
