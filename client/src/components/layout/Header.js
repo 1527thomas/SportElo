@@ -13,6 +13,9 @@ function Header() {
           alt=""
         />
       </Link>
+      <Link to="/Search">
+        Search
+      </Link>
       <AuthOptions />
     </div>
   );

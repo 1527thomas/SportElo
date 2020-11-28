@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const config = require("config");
+const MongoClient = require("mongodb").MongoClient;
 
 // set up express
 const app = express();
@@ -23,6 +24,7 @@ mongoose.connect(
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
+        useFindAndModify: false
     },
     (err) => {
         if (err) throw err;
@@ -33,3 +35,5 @@ mongoose.connect(
 // set up routes
 app.use("/users", require("./routes/userRouter"));
 app.use("/twitter", require("./routes/twitterRouter"));
+app.use("/newsapi", require("./routes/newsapiRouter"));
+app.use("/players", require("./routes/playersRouter"));

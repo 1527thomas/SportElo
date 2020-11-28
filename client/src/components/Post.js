@@ -6,10 +6,9 @@ import Tweet from "./Tweet";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
-import Axios from "axios";
 
 import Stats from "./Stats";
-
+import NewsApi from "./NewsApi";
 
 function Posts({ athletename, imageUrl }) {
     var Scroll = require('react-scroll');
@@ -67,7 +66,18 @@ function Posts({ athletename, imageUrl }) {
                           </Element>
                       </div>
                   </Slide>
-                  <Slide index={2}>I am the third Slide. Instagram?</Slide>
+                  <Slide index={2}>
+                      <div className="post__newsapi">
+                      <Element name="test7" className="element" id="containerElement" style={{
+                              position: 'relative',
+
+                              height: '450px',
+                              overflow: 'scroll'
+                          }}>
+                              <NewsApi athletename={athletename}/>
+                          </Element>
+                      </div>
+                  </Slide>
               </Slider>
               <ButtonBack className="post__back-button" >
                   <img className="post__arrow" src={backImage} alt="" />

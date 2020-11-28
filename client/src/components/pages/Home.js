@@ -1,31 +1,70 @@
-import React, { useState } from "react";
+import Axios from "axios";
+import React, { useState, useEffect } from "react";
 import "../../App.css";
 import Post from "../Post";
 
 function Home() {
-    const [posts, setPosts] = useState([
-        {
-            athletename: "Stephen Curry",
-            imageUrl:
-                "https://image-cdn.essentiallysports.com/wp-content/uploads/20200725130552/stephen-curry-gsw-2-scaled.jpg",
-        },
-        {
-            athletename: "Lebron James",
-            imageUrl:
-                "https://image-cdn.essentiallysports.com/wp-content/uploads/20200702112824/lebron-james-flexing-1600x901.jpg",
-        },
-    ]);
+    //should fetch DB to get user.followeredPlayers
 
+    const [athlete, setAthlete] = useState([]);
+
+    useEffect(() => {
+        const token = localStorage.getItem("auth-token");
+        checkPlayerId(token).then(userIdRes => {
+            getUsersAthletes(userIdRes).then(athleteRes => {
+                setAthlete(athleteRes);
+            })
+        })
+        .catch(err => {
+            console.log("Home rerender of CheckPlayerId error: " + err);
+        })
+    }, [])
 
     return (
         <div className="app__home">
-            {posts.map((post) => (
-                <Post athletename={post.athletename} imageUrl={post.imageUrl} />
-            ))}
-            
+            {athlete ? athlete.map((athlete) => (
+                <Post key={athlete._id} athletename={athlete.name} />
+            )) : <> </>}
         </div>
         
     );
+}
+
+async function checkPlayerId(token) {
+    const db = "http://localhost:5000/users/";
+    try {
+        return await Axios.get(db, {
+            headers: {
+                "x-auth-token": token
+            }
+        })
+        .then(res => {
+            return res.data.id;
+        })
+        .catch(err => {
+            console.log("Getting token: " + err);
+        })
+    }
+    catch (err) {
+        console.log("CheckPlayerId method error: " + err)
+    }
+}
+
+async function getUsersAthletes(userId) {
+    const dbPlayers = "http://localhost:5000/users/getPlayers";
+    try {
+        return await Axios.get(dbPlayers, {
+            params: {
+                userId: userId
+            }
+        })
+        .then(res => {
+            return res.data;
+        })
+    }
+    catch (err) {
+        console.log("GetUsersAthletes method error: " + err);
+    }
 }
 
 export default Home;

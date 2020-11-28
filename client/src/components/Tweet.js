@@ -4,8 +4,8 @@ import Axios from "axios";
 
 
 function Tweet({ handle }) {
-    console.log(handle);
-    const Id = getTweet(handle).then(res => {
+    // console.log(handle);
+    getTweet(handle).then(res => {
         var TwitterWidgetsLoader = require('twitter-widgets');
 
         TwitterWidgetsLoader.load(function (err, twttr) {
