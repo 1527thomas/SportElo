@@ -40,7 +40,8 @@ function NewsApi({ athletename }) {
 }
 
 async function getNews(athletename) {
-    return await Axios.get(
+    try {
+        return await Axios.get(
         "http://localhost:5000/newsapi", {
             params: {
                 athletename: athletename
@@ -52,5 +53,9 @@ async function getNews(athletename) {
         .catch(err => {
             console.log("Get to 5000/newsapi:" + err)
         })
+    }
+    catch (err) {
+        console.log("GetNews method error: " + err)
+    }
 }
 export default NewsApi;

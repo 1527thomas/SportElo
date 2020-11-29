@@ -120,11 +120,57 @@ router.post("/tokenIsValid", async (req, res) => {
 });
 
 router.get("/", auth, async (req, res) => {
-  const user = await User.findById(req.user);
-  res.json({
-    displayName: user.displayName,
-    id: user._id,
-  });
+  try {
+    const user = await User.findById(req.user);
+    res.json({
+      displayName: user.displayName,
+      id: user._id,
+    });
+  }
+  catch (err) {
+    res.status(500).json({ error: err.message })
+  }
 });
+
+router.post("/addPlayer", async (req, res) => {
+  try {
+
+    //check if player already exists in user's array for response to frontend
+    const userId = req.body.params.userId;
+    const player = req.body.params.player;
+    const user = await User.findById(userId);
+
+    if (user.players === undefined || user.players.length == 0) {
+      await User.findOneAndUpdate({_id: userId}, { $addToSet: { players: player }});
+      return res.json(true);
+    }
+    else {
+      for(var i = 0; i < user.players.length; i++) {
+        if(user.players[i].name === player.name) {
+          return res.json(false);
+        }
+        else {
+          await User.findOneAndUpdate({_id: userId}, { $addToSet: { players: player }});
+          return res.json(true);
+        }
+      }
+    }
+  }
+  catch (err) {
+    res.status(500).json({ error: err.message })
+  }
+  
+})
+
+router.get("/getPlayers", async (req, res) => {
+  try {
+    const userId = req.query.userId;
+    const userPlayers = await User.findById(userId);
+    return res.send(userPlayers.players);
+  }
+  catch (err) {
+    res.status(500).json({ error: err.message })
+  }
+})
 
 module.exports = router;
