@@ -4,9 +4,11 @@ import Axios from "axios";
 import Header from "./components/layout/Header";
 import Home from "./components/pages/Home";
 import Login from "./components/auth/Login";
+import LandingPage from "./components/pages/LandingPage";
 import Register from "./components/auth/Register";
 import UserContext from "./context/UserContext";
 import Search from "./components/pages/Search";
+import ProtectedRoute from "./components/auth/ProtectedRoutes";
 import "./App.css";
 
 function App() {
@@ -49,11 +51,19 @@ function App() {
         <UserContext.Provider value={{ userData, setUserData }}>
           <Header />
           <div className="container">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/search" component={Search} />
+            <Switch>\
+              {/* Public Pages */}
+              {/* LandingPage exact path="/" */}
+              {/* Login */}
+              {/* Register */}
+              <Route exact path="/" component={LandingPage} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
+              {/* Private Pages */}
+              {/* Home */}
+              {/* Search */}
+              <ProtectedRoute path="/home" component={<Home />} />
+              <ProtectedRoute path="/search" component={<Search />} />
             </Switch>
           </div>
         </UserContext.Provider>

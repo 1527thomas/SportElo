@@ -15,6 +15,7 @@ function AuthOptions() {
       user: undefined,
     });
     localStorage.setItem("auth-token", "");
+    history.push("/");
   };
 
   return (
