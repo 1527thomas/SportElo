@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import AuthOptions from "../auth/AuthOptions";
 import "./Header.css";
+import Button from "@material-ui/core/Button";
+import SearchIcon from '@material-ui/icons/Search';
+import logo from'./logo.png';
 
 function Header() {
   return (
@@ -13,10 +16,19 @@ function Header() {
           alt=""
         />
       </Link>
-      <Link to="/Search">
-        Search
-      </Link>
+      <div className="buttons">
+        <div className="search">
+          <Link to="/Search">
+          <Button variant="contained" color="primary">
+            <SearchIcon fontSize ="large"/>
+              
+                Search
+                
+          </Button>
+          </Link> 
+        </div>
       <AuthOptions />
+      </div>
     </div>
   );
 }
