@@ -6,10 +6,12 @@ import Post from "../Post";
 function Home() {
 
     const [athlete, setAthlete] = useState([]);
+    const [userId, setUserId] = useState("");
 
     useEffect(() => {
         const token = localStorage.getItem("auth-token");
         checkPlayerId(token).then(userIdRes => {
+            setUserId(userIdRes);
             getUsersAthletes(userIdRes).then(athleteRes => {
                 setAthlete(athleteRes);
             })
@@ -22,7 +24,8 @@ function Home() {
     return (
         <div className="app__home">
             {athlete ? athlete.map((athlete) => (
-                <Post key={athlete._id} athletename={athlete.name} athletepicture={athlete.picture}/>
+                <Post key={athlete._id} athletename={athlete.name} 
+                athletepicture={athlete.picture} playerId={athlete._id} userId={userId}/>
             )) : <> </>}
         </div>
         
