@@ -12,7 +12,8 @@ import NewsApi from "./NewsApi";
 
 import Axios from 'axios';
 
-function Posts({ athletename, athletepicture}) {
+function Posts({ athletename, athletepicture }) {
+    console.log(athletepicture);
     var Scroll = require('react-scroll');
     var Element = Scroll.Element;
     var backImage =
