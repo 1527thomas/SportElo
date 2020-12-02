@@ -48,6 +48,12 @@ From the SportElo folder. This will create the server and client for development
 $ npm run dev
 ```
 
+## Code Structure
+SportElo/client - Front-end react code. We have separated each component within the SportElo/client/src/components folder with subfolders auth, layout, and pages. <br />
+SportElo/config - API key and json web token secret storage <br />
+SportElo/routes - Contains express routes that are used within server.js <br />
+SportElo/server.js - starts the node.js server along with mongodb connection
+
 ## Credits
 Created by
 Thomas Wang
