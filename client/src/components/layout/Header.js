@@ -14,8 +14,6 @@ function Header() {
           className="app__headerImage"
           src={logo}
           alt=""
-          height =" 90px"
-          width = "125px"
         />
       </Link>
       <div className="buttons">

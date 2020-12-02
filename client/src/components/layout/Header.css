@@ -1,6 +1,5 @@
 .header {
   background-color: rgb(35, 0, 190);
-  padding: 20px;
   border-bottom: 1px solid lightgray;
   object-fit: contain;
   display: flex;
@@ -10,6 +9,7 @@
 
 .header .auth_options {
   display: flex;
+  margin-right: 10px;
 }
 
 .header .auth_options button {
@@ -26,4 +26,10 @@
 }
 .header .search {
   margin-right: 50px;
+}
+
+.app__headerImage {
+  height: 90px; 
+  width: 125px; 
+  object-fit: contain
 }

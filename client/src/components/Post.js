@@ -28,7 +28,7 @@ function Posts({ athletename, athletepicture}) {
             //twitterHandle = twitterRes;
             setTwitterHandle(twitterRes);
         });
-    },[]);
+    });
 
   return (
     <div className="post">

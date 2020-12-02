@@ -25,7 +25,7 @@ function Stats({ name }) {
 
             //gets last page of player game stat info to get latest game stats
             getStats(player_stat_id, page).then(res => {
-                if (res.data == 'undefined') {
+                if (res.data === 'undefined') {
                     document.getElementById(pointID).innerHTML = 0;
                     document.getElementById(rebID).innerHTML = 0;
                     document.getElementById(stlID).innerHTML = 0;

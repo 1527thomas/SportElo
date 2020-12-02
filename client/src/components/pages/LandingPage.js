@@ -1,5 +1,5 @@
-import Axios from "axios";
-import React, { useState, useEffect } from "react";
+
+import React from "react";
 import "../../App.css";
 
 function LandingPage() {
