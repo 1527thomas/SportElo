@@ -12,7 +12,7 @@ import NewsApi from "./NewsApi";
 
 import Axios from 'axios';
 
-function Posts({ athletename, imageUrl }) {
+function Posts({ athletename, athletepicture}) {
     var Scroll = require('react-scroll');
     var Element = Scroll.Element;
     //arrow images
@@ -20,22 +20,6 @@ function Posts({ athletename, imageUrl }) {
         "https://raw.githubusercontent.com/kimcoder/react-simple-image-slider/master/src/images/arrow-left-2.png";
     const nextArrow =
         "https://raw.githubusercontent.com/kimcoder/react-simple-image-slider/master/src/images/arrow-right-2.png";
-
-
-    //get atheltes handles/info based on name from player database in future
-    //var twitterHandle = "KingJames";
-    
-
-    var profilePic =
-        "https://image-cdn.essentiallysports.com/wp-content/uploads/20200702112824/lebron-james-flexing-1600x901.jpg";
-
-    if (athletename === "Stephen Curry") {
-        //twitterHandle = "StephenCurry30";
-        //used james harden cuz steph curry hasnt tweeted recently
-        //twitterHandle = "JHarden13";
-        profilePic =
-            "https://image-cdn.essentiallysports.com/wp-content/uploads/20200725130552/stephen-curry-gsw-2-scaled.jpg";
-    }
 
     const [twitterHandle, setTwitterHandle] = useState(null);
     useEffect(() => {
@@ -49,10 +33,11 @@ function Posts({ athletename, imageUrl }) {
   return (
     <div className="post">
       <div className="post__header">
+          {console.log(athletename)}
         <Avatar
           className="post__avatar"
           alt="StephCurry"
-          src={profilePic}
+          src={athletepicture}
         />
         <h3>{athletename}</h3>
       </div>

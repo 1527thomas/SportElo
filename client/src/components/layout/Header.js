@@ -9,7 +9,7 @@ import logo from'./logo2.png';
 function Header() {
   return (
     <div className="header">
-      <Link to="/">
+      <Link to="/home">
         <img
           className="app__headerImage"
           src={logo}

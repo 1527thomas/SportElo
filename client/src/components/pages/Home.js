@@ -23,7 +23,7 @@ function Home() {
     return (
         <div className="app__home">
             {athlete ? athlete.map((athlete) => (
-                <Post key={athlete._id} athletename={athlete.name} />
+                <Post key={athlete._id} athletename={athlete.name} athletepicture={athlete.picture}/>
             )) : <> </>}
         </div>
         
