@@ -21,7 +21,7 @@ this data and reduce the time spent switching between these other platforms, thu
 ## Features
 - [x] User Dashboard with latest posts
 - [x] Search Page with players from database
-- [ ] Profile Page
+- [x] Profile Page with password updating
 - [ ] Other Sports
 
 ## Installation
