@@ -173,4 +173,31 @@ router.get("/getPlayers", async (req, res) => {
   }
 })
 
+router.delete("/deletePlayer", async (req, res) => {
+  try {
+    
+    const userId = req.query.userId;
+    const playerId = req.query.playerId;
+    
+    const user = await User.findById(userId);
+
+    for(var i = 0; i < user.players.length; i++) {
+      if(user.players[i]._id == playerId) {
+        console.log("found");
+        await User.update(
+          { _id: userId },
+          { $pull: { players : { _id: playerId } } },
+          { safe: true }
+        )
+        return res.json(true);
+      }
+    }
+
+    return res.json(false);
+  }
+  catch(err) {
+    res.status(500).json({ error: err.message })
+  }
+})
+
 module.exports = router;

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
+import Axios from "axios";
 import "./Post.css";
-import Avatar from "@material-ui/core/Avatar";
+import Stats from "./Stats";
+import NewsApi from "./NewsApi";
+
+import { useHistory } from "react-router-dom";
 
 import Tweet from "./Tweet";
 import {
@@ -11,22 +15,32 @@ import {
   ButtonNext,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
+
+import Avatar from "@material-ui/core/Avatar";
 import DeleteIcon from '@material-ui/icons/Delete';
-import Button from "@material-ui/core/Button";
 import IconButton from '@material-ui/core/IconButton';
 
-import Stats from "./Stats";
-import NewsApi from "./NewsApi";
+function Posts({ athletename, athletepicture, playerId, userId }) {
 
-import Axios from "axios";
-
-function Posts({ athletename, athletepicture }) {
+    const history = useHistory();
   
-//   function handleClick(e) {
-//       e.preventDefault();
-//       //Delete a post
-//       console.log("button clicked");
-//   }
+    const handleDeletePlayer = async (event) => {
+        event.preventDefault();
+        deletePlayer(userId, playerId)
+        .then(res => {
+            console.log(res);
+            if(res) {
+                alert("Player Removed!");
+                history.go(0);
+            }
+            else {
+                alert("Player already deleted, or incorrect playerId");
+            }
+        })
+        .catch(err => {
+            console.log("deletePlayer error: " + err);
+        })
+    }
 
   var Scroll = require("react-scroll");
   var Element = Scroll.Element;
@@ -104,7 +118,7 @@ function Posts({ athletename, athletepicture }) {
         </ButtonNext>
       </CarouselProvider>
       <div className="post__delete">
-        <IconButton size="small" >
+        <IconButton size="small" onClick={handleDeletePlayer}>
             <DeleteIcon fontSize="large" />
                     
         </IconButton>
@@ -117,8 +131,6 @@ function Posts({ athletename, athletepicture }) {
     </div>
   );
 }
-
-
 
 async function getTwitterHandle(name) {
   const dbPlayers = "http://localhost:5000/players/twitterHandle";
@@ -133,6 +145,26 @@ async function getTwitterHandle(name) {
   } catch (err) {
     console.log("Get athletes twitter method error: " + err);
   }
+}
+
+async function deletePlayer(userId, playerId) {
+    const db = "http://localhost:5000/users/deletePlayer";
+    try {
+        console.log(userId, playerId);
+        return await Axios.delete(db, {
+            params: {
+                userId: userId,
+                playerId: playerId
+            }
+        })
+        .then(res => {
+            
+            return res.data;
+        })
+    }
+    catch (err) {
+        console.log("Delete athlete method error: " + err);
+    }
 }
 
 export default Posts;
