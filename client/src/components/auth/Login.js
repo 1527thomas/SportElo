@@ -16,12 +16,16 @@ function Login() {
       "http://localhost:5000/users/login",
       loginUser
     );
-    setUserData({
-      token: loginRes.data.token,
-      user: loginRes.data.user,
-    });
-    localStorage.setItem("auth-token", loginRes.data.token);
-    history.push("/home");
+    if (loginRes.data.valid) {
+      setUserData({
+        token: loginRes.data.token,
+        user: loginRes.data.user,
+      });
+      localStorage.setItem("auth-token", loginRes.data.token);
+      history.push("/home");
+    } else {
+      alert("Invalid Credentials, please try again.");
+    }
   };
 
   return (

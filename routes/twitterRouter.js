@@ -1,54 +1,39 @@
 const router = require("express").Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const config = require("config");
-const auth = require("../middleware/auth");
-const User = require("../models/userModel");
 
-const jwtSecret = config.get("jwtSecret");
-
-const needle = require('needle');
+const needle = require("needle");
 
 const token = config.get("twitterBearerToken");
 
-const endpointUrl = 'https://api.twitter.com/2/tweets/search/recent';
+const endpointUrl = "https://api.twitter.com/2/tweets/search/recent";
 
-
-//given a twitter handle find the most recent tweet
 router.get("/", async (req, res) => {
-    const twitterHandle = req.query.username;
-    const params = {
-        'query': 'from:' + twitterHandle,
-        'tweet.fields': 'author_id'
+  const twitterHandle = req.query.username;
+  const params = {
+    query: "from:" + twitterHandle,
+    "tweet.fields": "author_id",
+  };
+
+  const result = await needle("get", endpointUrl, params, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (result.body) {
+    if (result.body.data == null) {
+      return res.json({ msg: "No recent tweets" });
     }
+    for (var i = 0; i < result.body.data.length; i++) {
+      var tweet = result.body.data[i];
 
-    const result = await needle('get', endpointUrl, params, {
-        headers: {
-            "authorization": `Bearer ${token}`
-        }
-    })
-
-    if (result.body) {
-        if (result.body.data == null) {
-            return res
-                .json({ msg: "No recent tweets" });
-        }
-        //find the most newest tweet from recent tweets
-        for (var i = 0; i < result.body.data.length; i++) {
-            var tweet = result.body.data[i];
-
-            if (tweet.id == result.body.meta.newest_id) {
-                //console.log(tweet.id);
-                res.send(tweet);
-            }
-        }
-        //res.send(result.body);
-    } else {
-        return res
-            .status(404)
-            .json({ msg: "Tweets not found" });
+      if (tweet.id == result.body.meta.newest_id) {
+        res.send(tweet);
+      }
     }
-    //console.log(result.body);
+  } else {
+    return res.status(404).json({ msg: "Tweets not found" });
+  }
 });
 
 module.exports = router;

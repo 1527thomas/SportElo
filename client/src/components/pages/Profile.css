@@ -1,0 +1,31 @@
+.app__home {
+  background-color: #fafafa;
+  height: 100vh;
+  border-radius: 25px;
+}
+
+.app__home h2 {
+  text-align: center;
+}
+
+.display_name {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+
+.email {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+
+.passwordChange {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px;
+}
+
+.password_title {
+  font-weight: bold;
+}
