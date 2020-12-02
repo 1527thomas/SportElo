@@ -70,3 +70,9 @@
     object-fit: contain;
 }
 
+.post__delete {
+    position: relative;
+    float: right;
+    right: 10px;
+    bottom: 100px;
+}
