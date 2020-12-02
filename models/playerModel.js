@@ -9,6 +9,9 @@ const playerSchema = new mongoose.Schema({
     },
     sport: {
         type: String
+    },
+    picture: {
+        type: String,
     }
 });
 
