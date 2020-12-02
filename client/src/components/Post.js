@@ -15,7 +15,6 @@ import Axios from 'axios';
 function Posts({ athletename, athletepicture}) {
     var Scroll = require('react-scroll');
     var Element = Scroll.Element;
-    //arrow images
     var backImage =
         "https://raw.githubusercontent.com/kimcoder/react-simple-image-slider/master/src/images/arrow-left-2.png";
     const nextArrow =
@@ -24,8 +23,6 @@ function Posts({ athletename, athletepicture}) {
     const [twitterHandle, setTwitterHandle] = useState(null);
     useEffect(() => {
         getTwitterHandle(athletename).then(twitterRes => {
-            //console.log(twitterRes);
-            //twitterHandle = twitterRes;
             setTwitterHandle(twitterRes);
         });
     });
@@ -40,8 +37,6 @@ function Posts({ athletename, athletepicture}) {
         />
         <h3>{athletename}</h3>
       </div>
-          {/* header -> avatar + athletename */}
-            
           <CarouselProvider
               naturalSlideWidth={100}
               naturalSlideHeight={100}

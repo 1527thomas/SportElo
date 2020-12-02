@@ -6,11 +6,9 @@ import Axios from "axios";
 function Tweet({ handle }) {
     
     if (handle != null) {
-        //console.log(handle);
         getTweet(handle).then(res => {
             if (res === undefined) {
                 document.getElementById(handle).innerHTML = "No recent tweets";
-                //document.getElementById(handle).style.marginLeft = "40%";
                 document.getElementById(handle).style.marginTop = "40%";
                 document.getElementById(handle).style.textAlign = "center";
             }
@@ -18,11 +16,9 @@ function Tweet({ handle }) {
 
             TwitterWidgetsLoader.load(function (err, twttr) {
                 if (err) {
-                    //do some graceful degradation / fallback
                     return;
                 }
 
-                //checks if container is filled, if not create tweet
                 if (document.getElementById(handle).innerHTML === "")
                     twttr.widgets.createTweet(res, document.getElementById(handle));
             });

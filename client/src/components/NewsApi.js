@@ -22,10 +22,6 @@ function NewsApi({ athletename }) {
 
 
     return (
-        //NewsTitle
-        //NewsImage
-        //<a>Url</a>
-
         <div className="newsapi__post">
             <div className="newsapi__post__title">{athleteNewsTitle}</div>
             <div className="newsapi__post__image">

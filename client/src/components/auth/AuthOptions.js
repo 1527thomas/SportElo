@@ -23,7 +23,6 @@ function AuthOptions() {
     <nav className="auth_options">
       {userData.user ? (
         <Button onClick={logout}>Log out</Button>
- //       <button onClick={logout}>Log out</button>
       ) : (
         <>
         

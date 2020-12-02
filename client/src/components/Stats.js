@@ -9,7 +9,6 @@ function Stats({ name }) {
 
     var player_stat_id;
 
-    //various html ids
     var pointID = name + "points";
     var rebID = name + "reb";
     var stlID = name + "stl";
@@ -22,28 +21,16 @@ function Stats({ name }) {
 
             player_stat_id = res.data[0].id;
     
-            //get first page of player game info
             getStats(player_stat_id, 0).then(res => {
                 var page = res.meta.total_pages;
     
-                //gets last page of player game stat info to get latest game stats
                 getStats(player_stat_id, page).then(res => {
                     if (res.data === 'undefined') {
-                        // document.getElementById(pointID).innerHTML = stats[0];
-                        // document.getElementById(rebID).innerHTML = stats[1];
-                        // document.getElementById(stlID).innerHTML = 0;
-                        // document.getElementById(astID).innerHTML = 0;
-                        // document.getElementById(blkID).innerHTML = 0;
                         setStats([0, 0, 0, 0, 0]);
                         return;
                     }
                     var game = res.data.length - 1;
                     if (game < 0) {
-                        // document.getElementById(pointID).innerHTML = 0;
-                        // document.getElementById(rebID).innerHTML = 0;
-                        // document.getElementById(stlID).innerHTML = 0;
-                        // document.getElementById(astID).innerHTML = 0;
-                        // document.getElementById(blkID).innerHTML = 0;
                         setStats([0, 0, 0, 0, 0]);
                         return;
                     }
@@ -87,29 +74,14 @@ function Stats({ name }) {
                         
                     }
                     game = newGame;
-    
-                    // cant do get last game where player played due to following error currenting from API
-                    //Some records may come back with min: '0' despite not being true.
-    
-                    //various stats from latest game
                     
                     var pts = res.data[game].pts;
                     var reb = res.data[game].reb;
                     var stl = res.data[game].stl;
                     var ast = res.data[game].ast;
                     var blk = res.data[game].blk;
-                    // console.log(pts);
     
                     setStats([pts, reb, stl, ast, blk]);
-    
-                    // document.getElementById(pointID).innerHTML = pts;
-                    // document.getElementById(rebID).innerHTML = reb;
-                    // document.getElementById(stlID).innerHTML = stl;
-                    // document.getElementById(astID).innerHTML = ast;
-                    // document.getElementById(blkID).innerHTML = blk;
-    
-                    //if we want to add date to header
-                    //document.getElementById(statHeaderID).innerHTML = month + "/" + day + "/" + year + " Game Stats";
                 });
             });
         });

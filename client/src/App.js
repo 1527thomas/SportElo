@@ -51,17 +51,10 @@ function App() {
         <UserContext.Provider value={{ userData, setUserData }}>
           <Header />
           <div className="container">
-            <Switch>\
-              {/* Public Pages */}
-              {/* LandingPage exact path="/" */}
-              {/* Login */}
-              {/* Register */}
+            <Switch>
               <Route exact path="/" component={LandingPage} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-              {/* Private Pages */}
-              {/* Home */}
-              {/* Search */}
               <ProtectedRoute path="/home" component={<Home />} />
               <ProtectedRoute path="/search" component={<Search />} />
             </Switch>

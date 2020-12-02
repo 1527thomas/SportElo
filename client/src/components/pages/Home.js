@@ -4,7 +4,6 @@ import "../../App.css";
 import Post from "../Post";
 
 function Home() {
-    //should fetch DB to get user.followeredPlayers
 
     const [athlete, setAthlete] = useState([]);
 
