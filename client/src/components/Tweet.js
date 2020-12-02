@@ -8,7 +8,6 @@ function Tweet({ handle }) {
     if (handle != null) {
         //console.log(handle);
         getTweet(handle).then(res => {
-            console.log(res);
             if (res === undefined) {
                 document.getElementById(handle).innerHTML = "No recent tweets";
                 //document.getElementById(handle).style.marginLeft = "40%";

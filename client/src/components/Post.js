@@ -33,7 +33,6 @@ function Posts({ athletename, athletepicture}) {
   return (
     <div className="post">
       <div className="post__header">
-          {console.log(athletename)}
         <Avatar
           className="post__avatar"
           alt="StephCurry"
