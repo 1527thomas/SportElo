@@ -1,9 +1,5 @@
-# SportElo
-CMPE 195 Senior Project: Sport Elo
-
-
 ## SportElo
-A little info about your project and/ or overview that explains **what** the project is about.
+CMPE 195 Senior Project: SportElo
 SportElo is a web application which allows users to follow their favorite basketball players from our database (more players and sports coming soon!) 
 It leverages API's in order to fetch an athlete's latest stat's, twitter post, and news article.
 
