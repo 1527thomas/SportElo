@@ -4,69 +4,74 @@ import "../../App.css";
 import Post from "../Post";
 
 function Home() {
+  const [athlete, setAthlete] = useState([]);
+  const [userId, setUserId] = useState("");
 
-    const [athlete, setAthlete] = useState([]);
-    const [userId, setUserId] = useState("");
+  useEffect(() => {
+    const token = localStorage.getItem("auth-token");
+    checkPlayerId(token)
+      .then((userIdRes) => {
+        setUserId(userIdRes);
+        getUsersAthletes(userIdRes).then((athleteRes) => {
+          setAthlete(athleteRes);
+        });
+      })
+      .catch((err) => {
+        console.log("Home rerender of CheckPlayerId error: " + err);
+      });
+  }, []);
 
-    useEffect(() => {
-        const token = localStorage.getItem("auth-token");
-        checkPlayerId(token).then(userIdRes => {
-            setUserId(userIdRes);
-            getUsersAthletes(userIdRes).then(athleteRes => {
-                setAthlete(athleteRes);
-            })
-        })
-        .catch(err => {
-            console.log("Home rerender of CheckPlayerId error: " + err);
-        })
-    }, [])
-
-    return (
-        <div className="app__home">
-            {athlete ? athlete.map((athlete) => (
-                <Post key={athlete._id} athletename={athlete.name} 
-                athletepicture={athlete.picture} playerId={athlete._id} userId={userId}/>
-            )) : <> </>}
-        </div>
-        
-    );
+  return (
+    <div className="app__home">
+      {athlete ? (
+        athlete.map((athlete) => (
+          <Post
+            key={athlete._id}
+            athletename={athlete.name}
+            athletepicture={athlete.picture}
+            playerId={athlete._id}
+            userId={userId}
+          />
+        ))
+      ) : (
+        <> </>
+      )}
+    </div>
+  );
 }
 
 async function checkPlayerId(token) {
-    const db = "http://localhost:5000/users/";
-    try {
-        return await Axios.get(db, {
-            headers: {
-                "x-auth-token": token
-            }
-        })
-        .then(res => {
-            return res.data.id;
-        })
-        .catch(err => {
-            console.log("Getting token: " + err);
-        })
-    }
-    catch (err) {
-        console.log("CheckPlayerId method error: " + err)
-    }
+  const db = "http://localhost:5000/users/";
+  try {
+    return await Axios.get(db, {
+      headers: {
+        "x-auth-token": token,
+      },
+    })
+      .then((res) => {
+        return res.data.id;
+      })
+      .catch((err) => {
+        console.log("Getting token: " + err);
+      });
+  } catch (err) {
+    console.log("CheckPlayerId method error: " + err);
+  }
 }
 
 async function getUsersAthletes(userId) {
-    const dbPlayers = "http://localhost:5000/users/getPlayers";
-    try {
-        return await Axios.get(dbPlayers, {
-            params: {
-                userId: userId
-            }
-        })
-        .then(res => {
-            return res.data;
-        })
-    }
-    catch (err) {
-        console.log("GetUsersAthletes method error: " + err);
-    }
+  const dbPlayers = "http://localhost:5000/users/getPlayers";
+  try {
+    return await Axios.get(dbPlayers, {
+      params: {
+        userId: userId,
+      },
+    }).then((res) => {
+      return res.data;
+    });
+  } catch (err) {
+    console.log("GetUsersAthletes method error: " + err);
+  }
 }
 
 export default Home;

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const playerModel = require("./playerModel");
-const Player = require('./playerModel');
+const Player = require("./playerModel");
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
   displayName: {
     type: String,
   },
-  players: [Player.schema]
+  players: [Player.schema],
 });
 
 module.exports = User = mongoose.model("user", userSchema);

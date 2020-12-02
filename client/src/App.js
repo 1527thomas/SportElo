@@ -9,6 +9,7 @@ import Register from "./components/auth/Register";
 import UserContext from "./context/UserContext";
 import Search from "./components/pages/Search";
 import ProtectedRoute from "./components/auth/ProtectedRoutes";
+import Profile from "./components/pages/Profile";
 import "./App.css";
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
               <Route path="/register" component={Register} />
               <ProtectedRoute path="/home" component={<Home />} />
               <ProtectedRoute path="/search" component={<Search />} />
+              <ProtectedRoute path="/profile" component={<Profile />} />
             </Switch>
           </div>
         </UserContext.Provider>

@@ -11,7 +11,6 @@ router.post("/register", async (req, res) => {
   try {
     let { email, password, passwordCheck, displayName } = req.body;
 
-    // validate
     if (!email || !password || !passwordCheck) {
       return res.status(400).json({ msg: "Not all fields have been entered." });
     }
@@ -56,7 +55,6 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    //validate
     if (!email || !password) {
       return res.status(400).json({ msg: "Not all fields have been entered." });
     }
@@ -70,17 +68,18 @@ router.post("/login", async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: "Invalid credentials." });
+      return res.json({ valid: false, msg: "Invalid credentials." });
+    } else {
+      const token = jwt.sign({ id: user._id }, jwtSecret);
+      res.json({
+        token,
+        user: {
+          id: user._id,
+          displayName: user.displayName,
+        },
+        valid: true,
+      });
     }
-
-    const token = jwt.sign({ id: user._id }, jwtSecret);
-    res.json({
-      token,
-      user: {
-        id: user._id,
-        displayName: user.displayName,
-      },
-    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -119,85 +118,100 @@ router.post("/tokenIsValid", async (req, res) => {
   }
 });
 
+router.post("/password", async (req, res) => {
+  const { userId, password } = req.body;
+  const salt = await bcrypt.genSalt();
+  const passwordHash = await bcrypt.hash(password, salt);
+
+  const user = await User.findById(userId);
+
+  if (user) {
+    await User.updateOne(
+      { _id: userId },
+      { $set: { password: passwordHash } },
+      { safe: true }
+    );
+    return res.json(true);
+  }
+  return res.json(false);
+});
+
 router.get("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user);
     res.json({
+      email: user.email,
       displayName: user.displayName,
       id: user._id,
     });
-  }
-  catch (err) {
-    res.status(500).json({ error: err.message })
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
 router.post("/addPlayer", async (req, res) => {
   try {
-
-    //check if player already exists in user's array for response to frontend
     const userId = req.body.params.userId;
     const player = req.body.params.player;
     const user = await User.findById(userId);
 
     if (user.players === undefined || user.players.length == 0) {
-      await User.findOneAndUpdate({_id: userId}, { $addToSet: { players: player }});
+      await User.findOneAndUpdate(
+        { _id: userId },
+        { $addToSet: { players: player } }
+      );
       return res.json(true);
-    }
-    else {
-      for(var i = 0; i < user.players.length; i++) {
-        if(user.players[i].name === player.name) {
+    } else {
+      for (var i = 0; i < user.players.length; i++) {
+        if (user.players[i].name === player.name) {
           return res.json(false);
-        }
-        else {
-          await User.findOneAndUpdate({_id: userId}, { $addToSet: { players: player }});
+        } else {
+          await User.findOneAndUpdate(
+            { _id: userId },
+            { $addToSet: { players: player } }
+          );
           return res.json(true);
         }
       }
     }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
-  catch (err) {
-    res.status(500).json({ error: err.message })
-  }
-  
-})
+});
 
 router.get("/getPlayers", async (req, res) => {
   try {
     const userId = req.query.userId;
     const userPlayers = await User.findById(userId);
     return res.send(userPlayers.players);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
-  catch (err) {
-    res.status(500).json({ error: err.message })
-  }
-})
+});
 
 router.delete("/deletePlayer", async (req, res) => {
   try {
-    
     const userId = req.query.userId;
     const playerId = req.query.playerId;
-    
+
     const user = await User.findById(userId);
 
-    for(var i = 0; i < user.players.length; i++) {
-      if(user.players[i]._id == playerId) {
+    for (var i = 0; i < user.players.length; i++) {
+      if (user.players[i]._id == playerId) {
         console.log("found");
-        await User.update(
+        await User.updateOne(
           { _id: userId },
-          { $pull: { players : { _id: playerId } } },
+          { $pull: { players: { _id: playerId } } },
           { safe: true }
-        )
+        );
         return res.json(true);
       }
     }
 
     return res.json(false);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
-  catch(err) {
-    res.status(500).json({ error: err.message })
-  }
-})
+});
 
 module.exports = router;

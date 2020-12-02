@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 
 function AuthOptions() {
   const { userData, setUserData } = useContext(UserContext);
@@ -25,11 +25,8 @@ function AuthOptions() {
         <Button onClick={logout}>Log out</Button>
       ) : (
         <>
-        
           <Button onClick={register}>Register</Button>
           <Button onClick={login}>Log in</Button>
-        
-
         </>
       )}
     </nav>

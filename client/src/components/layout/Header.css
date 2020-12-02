@@ -25,11 +25,15 @@
   display: flex;
 }
 .header .search {
-  margin-right: 50px;
+  margin-right: 35px;
+}
+
+.header .profile {
+  margin-right: 35px;
 }
 
 .app__headerImage {
-  height: 90px; 
-  width: 125px; 
-  object-fit: contain
+  height: 90px;
+  width: 125px;
+  object-fit: contain;
 }
