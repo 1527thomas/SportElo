@@ -1,24 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Axios from "axios";
 
 
 
 function Tweet({ handle }) {
-    // console.log(handle);
-    getTweet(handle).then(res => {
-        var TwitterWidgetsLoader = require('twitter-widgets');
-
-        TwitterWidgetsLoader.load(function (err, twttr) {
-            if (err) {
-                //do some graceful degradation / fallback
-                return;
+    
+    if (handle != null) {
+        //console.log(handle);
+        getTweet(handle).then(res => {
+            console.log(res);
+            if (res == undefined) {
+                document.getElementById(handle).innerHTML = "No recent tweets";
+                //document.getElementById(handle).style.marginLeft = "40%";
+                document.getElementById(handle).style.marginTop = "40%";
+                document.getElementById(handle).style.textAlign = "center";
             }
+            var TwitterWidgetsLoader = require('twitter-widgets');
 
-            //checks if container is filled, if not create tweet
-            if (document.getElementById(handle).innerHTML === "")
-                twttr.widgets.createTweet(res, document.getElementById(handle));
+            TwitterWidgetsLoader.load(function (err, twttr) {
+                if (err) {
+                    //do some graceful degradation / fallback
+                    return;
+                }
+
+                //checks if container is filled, if not create tweet
+                if (document.getElementById(handle).innerHTML === "")
+                    twttr.widgets.createTweet(res, document.getElementById(handle));
+            });
         });
-    });
+    }
 
 
     return (

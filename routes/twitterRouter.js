@@ -29,7 +29,10 @@ router.get("/", async (req, res) => {
     })
 
     if (result.body) {
-
+        if (result.body.data == null) {
+            return res
+                .json({ msg: "No recent tweets" });
+        }
         //find the most newest tweet from recent tweets
         for (var i = 0; i < result.body.data.length; i++) {
             var tweet = result.body.data[i];

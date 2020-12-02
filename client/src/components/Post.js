@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Post.css";
 import Avatar from "@material-ui/core/Avatar";
 
@@ -9,6 +9,8 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 
 import Stats from "./Stats";
 import NewsApi from "./NewsApi";
+
+import Axios from 'axios';
 
 function Posts({ athletename, imageUrl }) {
     var Scroll = require('react-scroll');
@@ -21,17 +23,28 @@ function Posts({ athletename, imageUrl }) {
 
 
     //get atheltes handles/info based on name from player database in future
-    var twitterHandle = "KingJames";
+    //var twitterHandle = "KingJames";
+    
+
     var profilePic =
         "https://image-cdn.essentiallysports.com/wp-content/uploads/20200702112824/lebron-james-flexing-1600x901.jpg";
+
     if (athletename === "Stephen Curry") {
-        twitterHandle = "StephenCurry30";
+        //twitterHandle = "StephenCurry30";
         //used james harden cuz steph curry hasnt tweeted recently
         //twitterHandle = "JHarden13";
         profilePic =
             "https://image-cdn.essentiallysports.com/wp-content/uploads/20200725130552/stephen-curry-gsw-2-scaled.jpg";
-
     }
+
+    const [twitterHandle, setTwitterHandle] = useState(null);
+    useEffect(() => {
+        getTwitterHandle(athletename).then(twitterRes => {
+            //console.log(twitterRes);
+            //twitterHandle = twitterRes;
+            setTwitterHandle(twitterRes);
+        });
+    },[]);
 
   return (
     <div className="post">
@@ -60,7 +73,7 @@ function Posts({ athletename, imageUrl }) {
                               position: 'relative',
 
                               height: '450px',
-                              overflow: 'scroll'
+                              overflow: 'auto'
                           }}>
                               <Tweet handle={twitterHandle} />
                           </Element>
@@ -89,5 +102,22 @@ function Posts({ athletename, imageUrl }) {
       {/* image(s) */}
     </div>
   );
+}
+
+async function getTwitterHandle(name) {
+    const dbPlayers = "http://localhost:5000/players/twitterHandle";
+    try {
+        return await Axios.get(dbPlayers, {
+            params: {
+                name: name
+            }
+        })
+            .then(res => {
+                return res.data;
+            })
+    }
+    catch (err) {
+        console.log("Get athletes twitter method error: " + err);
+    }
 }
 export default Posts;

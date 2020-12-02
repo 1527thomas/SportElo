@@ -14,6 +14,18 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/twitterHandle", async (req, res) => {
+    try {
+        const athleteName = req.query.name;
+
+        const athlete = await Player.findOne({ name: athleteName } );
+        return res.send(athlete.twitter);
+    }
+    catch (err) {
+        res.status(500).json({ error: err.message })
+    }
+});
+
 //add's static data to DB?
 router.post("/add", async (req, res) => {
     const player = await Player.find();
