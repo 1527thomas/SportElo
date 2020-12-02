@@ -7,8 +7,4 @@ function ProtectedRoute({ component }) {
   return <>{isAuthenticated ? component : <Redirect to="/" />} </>;
 }
 
-function checkIfRealUser(token) {
-
-}
-
 export default ProtectedRoute;
