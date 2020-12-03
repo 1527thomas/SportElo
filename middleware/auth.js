@@ -1,6 +1,8 @@
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const config = require("config");
-const jwtSecret = config.get("jwtSecret");
+// const config = require("config");
+// const jwtSecret = config.get("jwtSecret");
+const jwtSecret = process.env.jwtSecret;
 
 const auth = (req, res, next) => {
   try {
