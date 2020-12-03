@@ -47,6 +47,10 @@ From the SportElo folder. This will create the server and client for development
 ```
 $ npm run dev
 ```
+To run the application through the [Heroku Link](https://sportelo.herokuapp.com/), you may just run the node server.
+```
+$ npm run server
+```
 
 ## Code Structure
 SportElo/client - Front-end react code. We have separated each component within the SportElo/client/src/components folder with subfolders auth, layout, and pages. <br />
