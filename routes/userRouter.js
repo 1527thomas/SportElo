@@ -1,11 +1,13 @@
+require("dotenv").config();
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const config = require("config");
+// const config = require("config");
 const auth = require("../middleware/auth");
 const User = require("../models/userModel");
 
-const jwtSecret = config.get("jwtSecret");
+// const jwtSecret = config.get("jwtSecret");
+const jwtSecret = process.env.jwtSecret;
 
 router.post("/register", async (req, res) => {
   try {
@@ -57,6 +59,7 @@ router.post("/login", async (req, res) => {
 
     if (!email || !password) {
       return res.status(400).json({ msg: "Not all fields have been entered." });
+      // return res.send("Not all fields entere");
     }
 
     const user = await User.findOne({ email: email });

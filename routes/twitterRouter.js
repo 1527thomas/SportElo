@@ -1,9 +1,11 @@
+require("dotenv").config();
 const router = require("express").Router();
-const config = require("config");
+// const config = require("config");
 
 const needle = require("needle");
 
-const token = config.get("twitterBearerToken");
+// const token = config.get("twitterBearerToken");
+const token = process.env.twitterBearerToken;
 
 const endpointUrl = "https://api.twitter.com/2/tweets/search/recent";
 

@@ -1,8 +1,10 @@
 const router = require("express").Router();
-const config = require("config");
+// const config = require("config");
+require("dotenv").config();
 const axios = require("axios");
 
-const key = config.get("newsapiToken");
+// const key = config.get("newsapiToken");
+const key = process.env.newsapiToken;
 
 const endpointUrl = "http://newsapi.org/v2/everything";
 

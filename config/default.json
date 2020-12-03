@@ -1,6 +1,0 @@
-{
-  "mongodbURI": "mongodb+srv://thomas-wang:FiTHs6euwWYbcdYo@sportelo-main.nmoqo.mongodb.net/sportelo?retryWrites=true&w=majority",
-  "jwtSecret": "Ja[k%Jjj-{$z_HX2xaZ}x_8+J'y8!n.W~sS4P2JP:F'5=s/e8U",
-  "twitterBearerToken": "AAAAAAAAAAAAAAAAAAAAACfnJQEAAAAALH3sLccN55a9GTMLf0HrKD4SMRg%3DdAY5ZRJbyPZq6syKZnXciRkBzQx9BtX8kXUDHQfZKSvchj9GMR",
-  "newsapiToken": "46efd8919d664146b807fbde43d25460"
-}

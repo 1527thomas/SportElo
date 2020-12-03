@@ -1,7 +1,8 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const config = require("config");
+// const config = require("config");
 const path = require("path");
 
 // set up express
@@ -31,7 +32,7 @@ app.listen(port, () => {
 });
 
 // set up mongoose
-const db = config.get("mongodbURI");
+const db = process.env.mongodbURI;
 
 mongoose.connect(
   db,
